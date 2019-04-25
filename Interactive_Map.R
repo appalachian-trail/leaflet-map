@@ -10,14 +10,17 @@ mcafee1963 <- readOGR("/Users/amullen2/Documents/Appalachian Trail/at_shapefiles
 m <- leaflet() %>%
   setView(lng = -80.0367, lat = 37.3929, zoom = 10) %>%
   addTiles() %>%
-  addPolylines(data=mcafeeknob, weight = 1.5, group = "McAfee Knob") %>%
-  addPolylines(data=mcafee1963, weight = 1.5, group = "McAfee Knob 1963") %>%
+  addProviderTiles(providers$MapBox, options = providerTileOptions(accessToken = 'pk.eyJ1IjoiYWJieS1tdWxsZW4iLCJhIjoiY2p0bXp4eDZmMDVmcDQ5cXBxemxlZDU0MyJ9.Mj9YtKzpPHQPIeIVX_O1eA',
+                                                                  id = 'abby-mullen.7w159yp9', opacity = .50), group = "USGS 1963") %>%
+  addPolylines(data=mcafeeknob, weight = 3, color = "red", group = "Appalachian Trail, c. 1980") %>%
+  addPolylines(data=mcafee1963, weight = 3, group = "Appalachian Trail, 1963") %>%
   addMarkers(
     lng = -80.0367, lat = 37.3929,
     label = "McAfee Knob",
     labelOptions = labelOptions(noHide = T, textOnly = TRUE)) %>%
   addLayersControl(
-    overlayGroups = c("McAfee Knob", "McAfee Knob 1963"),
+    overlayGroups = c("Appalachian Trail, c. 1980", "Appalachian Trail, 1963"),
+    baseGroups = c("USGS 1963"),
     options = layersControlOptions(collapsed = FALSE))
   
 
